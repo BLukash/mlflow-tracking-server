@@ -1,0 +1,19 @@
+FROM python:3.11-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential curl sqlite3 \
+  && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir \
+    mlflow \
+    boto3 \
+    botocore \
+    awscli
+
+RUN useradd -m app
+USER app
+WORKDIR /home/app
+
+RUN mkdir -p /mlflow/db
+
+EXPOSE 5000
