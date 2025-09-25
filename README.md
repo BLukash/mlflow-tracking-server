@@ -35,13 +35,6 @@ This setup is a template to run a lightweight **MLflow Tracking Server** inside 
     sudo usermod -aG docker $USER
     ```
 
-3. **Set Environment Variables**
-    Create a .env file in the project root:
-    ```env
-    AWS_DEFAULT_REGION=<your-region>
-    MLFLOW_ARTIFACT_URI=s3://<your-mlflow-artifacts-bucket>/mlruns
-    ```
-
 3. **Clone repo and start**
     ```bash
     git clone https://github.com/BLukash/mlflow-tracking-server.git
@@ -50,10 +43,17 @@ This setup is a template to run a lightweight **MLflow Tracking Server** inside 
     docker compose up -d
     ```
 
-4. **Access UI**
+4. **Set Environment Variables**
+    Create a .env file in the project root:
+    ```env
+    AWS_DEFAULT_REGION=<your-region>
+    MLFLOW_ARTIFACT_URI=s3://<your-mlflow-artifacts-bucket>/mlruns
+    ```
+
+5. **Access UI**
     - http://<EC2-public-IP>:5000
 
-5. **Automatic Backup of SQLite DB via crontab (every Sunday at 4:20, overriding previous backup)**
+6. **Automatic Backup of SQLite DB via crontab (every Sunday at 4:20, overriding previous backup)**
     ```bash
     crontab -e
     20 4 * * 0 docker exec mlflow aws s3 cp /mlflow/db/mlflow.db s3://my-mlflow-artifacts-bucket/backups/mlflow-weekly.db
