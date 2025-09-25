@@ -51,7 +51,7 @@ This setup is a template to run a lightweight **MLflow Tracking Server** inside 
     ```
 
 4. **Access UI**
-    - http://<EC2-public-IP>:5000
+    - http://EC2-public-IP:5000
 
 5. **Automatic Backup of SQLite DB via crontab (every Sunday at 4:20, overriding previous backup)**
     ```bash
