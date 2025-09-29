@@ -11,15 +11,15 @@ This setup is a template to run a lightweight **MLflow Tracking Server** inside 
 
 1. **Launch EC2 Instance**
     - Use Ubuntu or Amazon Linux.
-    - Security Group: open TCP port 5000 only to your IP (not 0.0.0.0/0).
-    - IAM Role: attach to the EC2 instance with S3 permissions:
+    - Security Group: open TCP port 5000 (only to your IP (not 0.0.0.0/0) if ypu value security).
+    - IAM Role: attach to the EC2 instance with S3 permissions (or just S3 full access):
         - s3:PutObject
         - s3:GetObject
         - s3:ListBucket
 
 2. **Create S3 bucket for artifacts storage and metadata backup**
 
-3. **Install Docker and Compose**
+3. **[Install Docker and Compose](https://docs.docker.com/engine/install/ubuntu/)**
     ```bash
     sudo apt-get update
     sudo apt-get install ca-certificates curl
@@ -35,19 +35,23 @@ This setup is a template to run a lightweight **MLflow Tracking Server** inside 
     sudo usermod -aG docker $USER
     ```
 
-4. **Clone repo and start**
+4. **Clone repo**
     ```bash
     git clone https://github.com/BLukash/mlflow-tracking-server.git
     cd mlflow-tracking-server
-    docker compose build
-    docker compose up -d
     ```
 
-5. **Set Environment Variables**
+4. **Set Environment Variables**
     Create a .env file in the project root:
     ```env
     AWS_DEFAULT_REGION=<your-region>
     MLFLOW_ARTIFACT_URI=s3://<your-mlflow-artifacts-bucket>/mlruns
+    ```
+
+5. **Build Docker images and start mlflow tracking server**
+    ```bash
+    docker compose build
+    docker compose up -d
     ```
 
 6. **Access UI**
