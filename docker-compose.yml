@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   mlflow:
     build:
@@ -21,8 +19,9 @@ services:
       mlflow server
         --host 0.0.0.0
         --port 5000
+        --serve-artifacts
         --backend-store-uri sqlite:////mlflow/db/mlflow.db
-        --default-artifact-root ${MLFLOW_ARTIFACT_URI}
+        --artifacts-destination ${MLFLOW_ARTIFACT_URI}
 
 volumes:
   mlflow_db:

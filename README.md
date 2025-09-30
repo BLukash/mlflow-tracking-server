@@ -1,4 +1,4 @@
-# MLflow Tracking Server on EC2 (Docker + SQLite + S3)
+# MLflow Tracking Server template (Docker + SQLite + S3)
 
 This setup is a template to run a lightweight **MLflow Tracking Server** inside Docker on an EC2 instance.  
 
